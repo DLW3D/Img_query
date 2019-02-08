@@ -17,4 +17,9 @@ public class PictureServiceImpl implements PictureService {
     public List<Picture> search(String keyword) {
         return pictureMapper.selectByKeyword(keyword);
     }
+
+    @Override
+    public Picture get(int pid){
+        return pictureMapper.selectByPrimaryKey(pid);
+    }
 }

@@ -38,4 +38,14 @@ public class PicTypeServiceImpl implements PicTypeService {
     public void fill(Picture picture){
         picture.setPicTypes(list(picture.getPid()));
     }
+
+    @Override
+    public void delete(int tid) {
+        picTypeMapper.deleteByPrimaryKey(tid);
+    }
+
+    @Override
+    public void add(PicType type) {
+        picTypeMapper.insertSelective(type);
+    }
 }

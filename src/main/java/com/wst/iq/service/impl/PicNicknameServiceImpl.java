@@ -39,4 +39,14 @@ public class PicNicknameServiceImpl implements PicNicknameService {
     public void fill(Picture picture) {
         picture.setPicNicknames(list(picture.getPid()));
     }
+
+    @Override
+    public void delete(int nid) {
+        picNicknameMapper.deleteByPrimaryKey(nid);
+    }
+
+    @Override
+    public void add(PicNickname nickname) {
+        picNicknameMapper.insertSelective(nickname);
+    }
 }

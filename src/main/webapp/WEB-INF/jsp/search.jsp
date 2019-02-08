@@ -25,8 +25,8 @@
 <body>
 
     <ol class="breadcrumb">
-        <li><a href="admin_category_list">图片搜索</a></li>
-        <li class="active">搜索</li>
+        <li><a href="/search">图片搜索</a></li>
+        <li class="active">主页</li>
     </ol>
 
     <div class="container">
@@ -62,10 +62,14 @@
                     <tr>
                         <td>${p.pid}</td>
                         <td>
-                            <img width="40px" src="img/productSingle/${p.pid}.jpg">
+                            <img width="40px" src="img/pics/${p.pid}.jpg">
                         </td>
                         <td>${p.name}</td>
-                        <td><c:forEach items="${p.picTypes}" var="t"><a>${t.type_name}</a>;</c:forEach></td>
+                        <td>
+                            <c:forEach items="${p.picTypes}" var="t"><a href="/search?keyword=${t.type_name}">
+                                    ${t.type_name}</a>;
+                            </c:forEach>
+                        </td>
                         <td>${p.user.nickname}</td>
                         <td><fmt:formatDate value="${p.date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>${p.used}</td>
@@ -76,7 +80,7 @@
                     <tr class="CommentTR" pid="${p.pid}" style="display: none;">
                         <td colspan="10" align="center">
                             <div style="padding:20px;">
-                            <table align="center">
+                            <table align="center" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <td style="padding:5px">态度</td>

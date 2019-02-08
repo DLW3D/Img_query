@@ -10,4 +10,6 @@ public interface PicTypeService {
     List list(int pid);
     void fill(List<Picture> pictures);
     void fill(Picture picture);
+    void delete(int tid);
+    void add(PicType type);
 }

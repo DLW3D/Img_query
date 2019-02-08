@@ -2,11 +2,10 @@ package com.wst.iq.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wst.iq.pojo.PicNickname;
+import com.wst.iq.pojo.PicType;
 import com.wst.iq.pojo.Picture;
-import com.wst.iq.service.PicCommentService;
-import com.wst.iq.service.PicNicknameService;
-import com.wst.iq.service.PictureService;
-import com.wst.iq.service.UserService;
+import com.wst.iq.service.*;
 import com.wst.iq.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,8 @@ public class searchController {
 
     @Autowired
     private PictureService pictureService;
+    @Autowired
+    private PicTypeService picTypeService;
     @Autowired
     private PicCommentService picCommentService;
     @Autowired
@@ -39,6 +40,8 @@ public class searchController {
 
         picCommentService.fill(ps);
         picNicknameService.fill(ps);
+        picTypeService.fill(ps);
+        picNicknameService.fill(ps);
         userService.fillThrow(ps);
 
         model.addAttribute("ps",ps);
@@ -46,4 +49,43 @@ public class searchController {
         return "search";
     }
 
+    @RequestMapping("editPicture")
+    public String editPicture(int pid, Model model){
+        Picture picture = pictureService.get(pid);
+        picNicknameService.fill(picture);
+        picTypeService.fill(picture);
+
+        model.addAttribute("p",picture);
+        return "editPicture";
+    }
+
+    @RequestMapping("deleteNickname")
+    public String deleteNickname(int nid, Model model){
+        int pid =picNicknameService.get(nid).getPid();
+        picNicknameService.delete(nid);
+
+        return "redirect:editPicture?pid="+pid;
+    }
+
+    @RequestMapping("deleteType")
+    public String deleteType(int tid, Model model){
+        int pid =picTypeService.get(tid).getPid();
+        picTypeService.delete(tid);
+
+        return "redirect:editPicture?pid="+pid;
+    }
+
+    @RequestMapping("addNickname")
+    public String addNickname(PicNickname nickname, Model model){
+        picNicknameService.add(nickname);
+
+        return "redirect:editPicture?pid="+nickname.getPid();
+    }
+
+    @RequestMapping("addType")
+    public String addType(PicType type, Model model){
+        picTypeService.add(type);
+
+        return "redirect:editPicture?pid="+type.getPid();
+    }
 }
