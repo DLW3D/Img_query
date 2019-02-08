@@ -152,7 +152,8 @@
     SELECT DISTINCT
     picture.*
     FROM picture LEFT JOIN pic_nickname ON picture.pid = pic_nickname.pid
-    WHERE pic_nickname.nickname LIKE '%${keyword}%'
+    WHERE
+    pic_nickname.nickname LIKE '%${keyword}%' OR picture.name LIKE '%${keyword}%'
     ORDER BY used
   </select>
 </mapper>

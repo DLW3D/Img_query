@@ -52,7 +52,7 @@
                                 <a href="/search?keyword=${t.type_name}">${t.type_name}(<a href="/deleteType?tid=${t.tid}">删除</a>);</a>
                             </c:forEach>
                             <form method="post" action="/addType">
-                                <input name="type" value="" type="text" class="form-control" placeholder="添加别名..."/>
+                                <input name="type_name" value="" type="text" class="form-control" placeholder="添加别名..."/>
                                 <input type="hidden" name="pid" value="${p.pid}">
                                 <button class="btn btn-success" type="submit">添加</button>
                             </form>

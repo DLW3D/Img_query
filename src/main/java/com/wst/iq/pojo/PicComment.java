@@ -15,7 +15,7 @@ public class PicComment {
 
     private Date comm_time;
 
-    //自定义属性
+    //自定义成员
     private User user;
 
     public Integer getCid() {
@@ -83,6 +83,7 @@ public class PicComment {
                 ", uid=" + uid +
                 ", comment='" + comment + '\'' +
                 ", comm_time=" + comm_time +
+                ", user=" + user +
                 '}';
     }
 }
