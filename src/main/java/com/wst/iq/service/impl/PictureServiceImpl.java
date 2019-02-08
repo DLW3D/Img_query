@@ -22,4 +22,9 @@ public class PictureServiceImpl implements PictureService {
     public Picture get(int pid){
         return pictureMapper.selectByPrimaryKey(pid);
     }
+
+    @Override
+    public void add(Picture picture) {
+        pictureMapper.insertSelective(picture);
+    }
 }

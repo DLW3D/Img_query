@@ -66,13 +66,15 @@
     delete from picture
     where pid = #{pid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wst.iq.pojo.Picture">
+  <!--增加了返回自增主键-->
+  <insert id="insert" parameterType="com.wst.iq.pojo.Picture" useGeneratedKeys="true" keyProperty="pid">
     insert into picture (pid, name, type, 
       uid, date, used)
     values (#{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{uid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{used,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.wst.iq.pojo.Picture">
+  <!--增加了返回自增主键-->
+  <insert id="insertSelective" parameterType="com.wst.iq.pojo.Picture" useGeneratedKeys="true" keyProperty="pid">
     insert into picture
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">

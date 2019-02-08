@@ -62,7 +62,7 @@
                     <tr>
                         <td>${p.pid}</td>
                         <td>
-                            <img width="40px" src="img/pics/${p.pid}.jpg">
+                            <img width="40px" src="img/small/${p.pid}.jpg">
                         </td>
                         <td>${p.name}</td>
                         <td>

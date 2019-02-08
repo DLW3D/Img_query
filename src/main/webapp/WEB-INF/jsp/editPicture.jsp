@@ -12,24 +12,6 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<script>
-    $(function() {
-        $("#editForm").submit(function() {
-            if (!checkEmpty("name", "产品名称"))
-                return false;
-//			if (!checkEmpty("subTitle", "小标题"))
-//				return false;
-            if (!checkNumber("originalPrice", "原价格"))
-                return false;
-            if (!checkNumber("promotePrice", "优惠价格"))
-                return false;
-            if (!checkInt("stock", "库存"))
-                return false;
-            return true;
-        });
-    });
-</script>
-
 <body>
 
     <ol class="breadcrumb">
@@ -44,7 +26,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>图片</td>
-                        <td><img width="40px" src="img/pics/${p.pid}.jpg"></td>
+                        <td><img width="40px" src="img/small/${p.pid}.jpg"></td>
                     </tr>
                     <tr>
                         <td>图片名称</td>

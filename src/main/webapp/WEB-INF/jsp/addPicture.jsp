@@ -39,42 +39,27 @@
 
     <div class="container">
         <div class="panel panel-warning editDiv">
-            <div class="panel-heading">编辑图片</div>
+            <div class="panel-heading">添加图片</div>
             <div class="panel-body">
-                <form method="post" id="editForm" action="editPicture">
-                    <table class="editTable">
+                <form method="post" action="addPic" enctype="multipart/form-data">
+                    <table class="table table-bordered">
                         <tr>
                             <td>图片名称</td>
-                            <td><input id="name" name="name" value="${p.name}"
-                                       type="text" class="form-control"></td>
+                            <td><input name="name" type="text" placeholder="不可修改"></td>
                         </tr>
                         <tr>
-                            <td>产品小标题</td>
-                            <td><input id="subTitle" name="subTitle" type="text"
-                                       value="${p.subTitle}"
-                                       class="form-control"></td>
+                            <td>上传图片</td>
+                            <td>
+                                <input name="image" accept="image/*" type="file" />
+                            </td>
                         </tr>
-                        <tr>
-                            <td>原价格</td>
-                            <td><input id="originalPrice" value="${p.originalPrice}" name="originalPrice" type="text"
-                                       class="form-control"></td>
-                        </tr>
-                        <tr>
-                            <td>优惠价格</td>
-                            <td><input id="promotePrice"  value="${p.promotePrice}" name="promotePrice" type="text"
-                                       class="form-control"></td>
-                        </tr>
-                        <tr>
-                            <td>库存</td>
-                            <td><input id="stock"  value="${p.stock}" name="stock" type="text"
-                                       class="form-control"></td>
-                        </tr>
-
                         <tr class="submitTR">
                             <td colspan="2" align="center">
-                                <input type="hidden" name="id" value="${p.id}">
-                                <input type="hidden" name="cid" value="${p.category.id}">
-                                <button type="submit" class="btn btn-success">提 交</button></td>
+                                <c:if test="${!empty user}">
+                                    <input type="hidden" name="uid" value="${user.uid}">
+                                </c:if>
+                                <button type="submit" class="btn btn-success">提 交</button>
+                            </td>
                         </tr>
                     </table>
                 </form>

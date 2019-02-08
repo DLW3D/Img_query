@@ -9,4 +9,6 @@ public interface PictureService {
     List<Picture> search(String keyword);
 
     Picture get(int pid);
+
+    void add(Picture picture);
 }
