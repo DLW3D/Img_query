@@ -145,4 +145,12 @@
       used = #{used,jdbcType=INTEGER}
     where pid = #{pid,jdbcType=INTEGER}
   </update>
+  <!--自定义SQL-->
+  <select id="selectByKeyword" resultType="com.wst.iq.pojo.Picture">
+    SELECT DISTINCT
+    picture.*
+    FROM picture LEFT JOIN pic_nickname ON picture.pid = pic_nickname.pid
+    WHERE pic_nickname.nickname LIKE '%${keyword}%'
+    ORDER BY used
+  </select>
 </mapper>

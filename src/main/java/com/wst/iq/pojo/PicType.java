@@ -30,4 +30,13 @@ public class PicType {
     public void setType_name(String type_name) {
         this.type_name = type_name == null ? null : type_name.trim();
     }
+
+    @Override
+    public String toString() {
+        return "PicType{" +
+                "tid=" + tid +
+                ", pid=" + pid +
+                ", type_name='" + type_name + '\'' +
+                '}';
+    }
 }

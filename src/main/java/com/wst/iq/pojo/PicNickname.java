@@ -30,4 +30,13 @@ public class PicNickname {
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
     }
+
+    @Override
+    public String toString() {
+        return "PicNickname{" +
+                "nid=" + nid +
+                ", pid=" + pid +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

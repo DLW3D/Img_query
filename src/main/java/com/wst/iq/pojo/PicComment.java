@@ -62,4 +62,16 @@ public class PicComment {
     public void setComm_time(Date comm_time) {
         this.comm_time = comm_time;
     }
+
+    @Override
+    public String toString() {
+        return "PicComment{" +
+                "cid=" + cid +
+                ", pid=" + pid +
+                ", attitude=" + attitude +
+                ", uid=" + uid +
+                ", comment='" + comment + '\'' +
+                ", comm_time=" + comm_time +
+                '}';
+    }
 }

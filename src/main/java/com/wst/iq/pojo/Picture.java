@@ -1,6 +1,7 @@
 package com.wst.iq.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Picture {
     private Integer pid;
@@ -14,6 +15,12 @@ public class Picture {
     private Date date;
 
     private Integer used;
+
+    //自定义成员
+    private List<PicComment> picComments;
+    private List<PicNickname> picNicknames;
+    private List<PicType> picTypes;
+    private User user;
 
     public Integer getPid() {
         return pid;
@@ -61,5 +68,53 @@ public class Picture {
 
     public void setUsed(Integer used) {
         this.used = used;
+    }
+
+    public List<PicComment> getPicComments() {
+        return picComments;
+    }
+
+    public void setPicComments(List<PicComment> picComments) {
+        this.picComments = picComments;
+    }
+
+    public List<PicNickname> getPicNicknames() {
+        return picNicknames;
+    }
+
+    public void setPicNicknames(List<PicNickname> picNicknames) {
+        this.picNicknames = picNicknames;
+    }
+
+    public List<PicType> getPicTypes() {
+        return picTypes;
+    }
+
+    public void setPicTypes(List<PicType> picTypes) {
+        this.picTypes = picTypes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "pid=" + pid +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", uid=" + uid +
+                ", date=" + date +
+                ", used=" + used +
+                ", picComments=" + picComments +
+                ", picNicknames=" + picNicknames +
+                ", picTypes=" + picTypes +
+                ", user=" + user +
+                '}';
     }
 }

@@ -2,6 +2,8 @@ package com.wst.iq.mapper;
 
 import com.wst.iq.pojo.Picture;
 import com.wst.iq.pojo.PictureExample;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface PictureMapper {
@@ -18,4 +20,7 @@ public interface PictureMapper {
     int updateByPrimaryKeySelective(Picture record);
 
     int updateByPrimaryKey(Picture record);
+
+    // 非自动生成字段
+    List<Picture> selectByKeyword(@Param("keyword")String keyword);
 }
