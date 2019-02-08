@@ -6,9 +6,11 @@ import com.wst.iq.pojo.PicCommentExample;
 import com.wst.iq.pojo.Picture;
 import com.wst.iq.service.PicCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PicCommentServiceImpl implements PicCommentService {
     @Autowired
     PicCommentMapper picCommentMapper;

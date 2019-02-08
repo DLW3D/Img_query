@@ -6,9 +6,11 @@ import com.wst.iq.pojo.PicTypeExample;
 import com.wst.iq.pojo.Picture;
 import com.wst.iq.service.PicTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PicTypeServiceImpl implements PicTypeService {
     @Autowired
     PicTypeMapper picTypeMapper;
@@ -22,7 +24,6 @@ public class PicTypeServiceImpl implements PicTypeService {
     public List list(int pid) {
         PicTypeExample example = new PicTypeExample();
         example.createCriteria().andPidEqualTo(pid);
-        example.setOrderByClause("comm_time DESC");
         return picTypeMapper.selectByExample(example);
     }
 

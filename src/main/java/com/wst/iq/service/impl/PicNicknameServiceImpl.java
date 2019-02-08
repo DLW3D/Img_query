@@ -7,9 +7,11 @@ import com.wst.iq.pojo.PicNicknameExample;
 import com.wst.iq.pojo.Picture;
 import com.wst.iq.service.PicNicknameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PicNicknameServiceImpl implements PicNicknameService {
     @Autowired
     PicNicknameMapper picNicknameMapper;
@@ -23,7 +25,6 @@ public class PicNicknameServiceImpl implements PicNicknameService {
     public List list(int pid) {
         PicNicknameExample example = new PicNicknameExample();
         example.createCriteria().andPidEqualTo(pid);
-        example.setOrderByClause("comm_time DESC");
         return picNicknameMapper.selectByExample(example);
     }
 

@@ -15,6 +15,9 @@ public class PicComment {
 
     private Date comm_time;
 
+    //自定义属性
+    private User user;
+
     public Integer getCid() {
         return cid;
     }
@@ -61,6 +64,14 @@ public class PicComment {
 
     public void setComm_time(Date comm_time) {
         this.comm_time = comm_time;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
