@@ -13,17 +13,20 @@
 </head>
 
 <script>
-    $(function() {
-        $("#editForm").submit(function() {
-            if (!checkEmpty("name", "产品名称"))
+    function checkEmpty(id, name){
+        var value = $("#"+id).val();
+        if(value.length==0){
+            alert(name+ "不能为空");
+            $("#"+id)[0].focus();
+            return false;
+        }
+        return true;
+    }
+    $(function(){
+        $("#addForm").submit(function(){
+            if(!checkEmpty("name","图片名称"))
                 return false;
-//			if (!checkEmpty("subTitle", "小标题"))
-//				return false;
-            if (!checkNumber("originalPrice", "原价格"))
-                return false;
-            if (!checkNumber("promotePrice", "优惠价格"))
-                return false;
-            if (!checkInt("stock", "库存"))
+            if(!checkEmpty("image","上传图片"))
                 return false;
             return true;
         });
@@ -41,16 +44,16 @@
         <div class="panel panel-warning editDiv">
             <div class="panel-heading">添加图片</div>
             <div class="panel-body">
-                <form method="post" action="addPic" enctype="multipart/form-data">
+                <form method="post" action="addPic" enctype="multipart/form-data" id="addForm">
                     <table class="table table-bordered">
                         <tr>
                             <td>图片名称</td>
-                            <td><input name="name" type="text" placeholder="不可修改"></td>
+                            <td><input name="name" type="text" placeholder="不可修改" id="name" /></td>
                         </tr>
                         <tr>
                             <td>上传图片</td>
                             <td>
-                                <input name="image" accept="image/*" type="file" />
+                                <input name="image" accept="image/*" type="file" id="image" />
                             </td>
                         </tr>
                         <tr class="submitTR">

@@ -12,6 +12,29 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
+<script>
+    function checkEmpty(id){
+        var value = $("#"+id).val();
+        if(value.length==0){
+            $("#"+id)[0].focus();
+            return false;
+        }
+        return true;
+    }
+    $(function(){
+        $("#addName").submit(function(){
+            if(!checkEmpty("name"))
+                return false;
+            return true;
+        });
+        $("#addType").submit(function(){
+            if(!checkEmpty("type"))
+                return false;
+            return true;
+        });
+    });
+</script>
+
 <body>
 
     <ol class="breadcrumb">
@@ -38,8 +61,8 @@
                             <c:forEach items="${p.picNicknames}" var="n">
                                 <a href="/search?keyword=${n.nickname}">${n.nickname}(<a href="/deleteNickname?nid=${n.nid}">删除</a>);</a>
                             </c:forEach>
-                            <form method="post" action="/addNickname">
-                                <input name="nickname" value="" type="text" class="form-control" placeholder="添加别名..."/>
+                            <form method="post" action="/addNickname" id="addName">
+                                <input name="nickname" value="" type="text" class="form-control" placeholder="添加别名..." id="name">
                                 <input type="hidden" name="pid" value="${p.pid}">
                                 <button class="btn btn-success" type="submit">添加</button>
                             </form>
@@ -51,8 +74,8 @@
                             <c:forEach items="${p.picTypes}" var="t">
                                 <a href="/search?keyword=${t.type_name}">${t.type_name}(<a href="/deleteType?tid=${t.tid}">删除</a>);</a>
                             </c:forEach>
-                            <form method="post" action="/addType">
-                                <input name="type_name" value="" type="text" class="form-control" placeholder="添加别名..."/>
+                            <form method="post" action="/addType" id="addType">
+                                <input name="type_name" value="" type="text" class="form-control" placeholder="添加分类..." id="type">
                                 <input type="hidden" name="pid" value="${p.pid}">
                                 <button class="btn btn-success" type="submit">添加</button>
                             </form>
