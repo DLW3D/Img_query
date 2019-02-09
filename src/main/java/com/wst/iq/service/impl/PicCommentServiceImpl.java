@@ -39,4 +39,9 @@ public class PicCommentServiceImpl implements PicCommentService {
     public void fill(Picture picture){
         picture.setPicComments(list(picture.getPid()));
     }
+
+    @Override
+    public void add(PicComment picComment) {
+        picCommentMapper.insertSelective(picComment);
+    }
 }

@@ -30,6 +30,7 @@
     <ol class="breadcrumb">
         <li><a href="/search">图片搜索</a></li>
         <li class="active">编辑图片</li>
+        <%@include file="userTop.jsp"%>
     </ol>
 
     <div class="container">

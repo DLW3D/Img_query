@@ -10,4 +10,5 @@ public interface PicCommentService {
     List list(int pid);
     void fill(List<Picture> pictures);
     void fill(Picture picture);
+    void add(PicComment picComment);
 }

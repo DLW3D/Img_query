@@ -8,6 +8,20 @@
             var pid = $(this).attr("pid");
             $("tr.CommentTR[pid="+pid+"]").toggle();
         });
+        $("button.commButton").click(function(){
+            var pid = $(this).attr("pid");
+            var attitude = $("label[pid='"+pid+"'].active").attr("attitude");
+            var comment = $("textarea[pid='"+pid+"']").val();
+            //alert(attitude + "|||" + comment);
+            $.post(
+                "addComment",
+                {"pid":pid,"attitude":attitude,"comment":comment},
+                function(result){
+                    if("success"==result)
+                        location.reload();
+                }
+            );
+        });
     });
 
 </script>
@@ -16,19 +30,7 @@
     <ol class="breadcrumb">
         <li><a href="/search">图片搜索</a></li>
         <li class="active">主页</li>
-        <span class="pull-right">
-            <c:if test="${!empty user}">
-                这是你的用户名:
-                <a href="login">${user.name}</a>
-                你不喜欢也没办法,反正不能改
-                <a href="logout">退出</a>
-            </c:if>
-            <c:if test="${empty user}">
-                你可以:
-                <a href="login">登录</a>
-                <a href="register">注册</a>
-            </c:if>
-        </span>
+        <%@include file="userTop.jsp"%>
     </ol>
 
     <div class="container">
@@ -39,7 +41,8 @@
                            value="<%String keyword = request.getParameter("keyword");%>${param.keyword}" type="text"
                            class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">搜索</button>
+                        <button class="btn btn-default btn-primary" type="submit">搜索</button>
+                        <a class="btn btn-default" href="addPicture">上传图片</a>
                     </span>
                 </div>
             </form>
@@ -85,10 +88,10 @@
                             <table align="center" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td style="padding:5px">态度</td>
-                                        <td style="padding:5px">评论者</td>
-                                        <td style="padding:5px">评价</td>
-                                        <td style="padding:5px">评论时间</td>
+                                        <td>态度</td>
+                                        <td>评论者</td>
+                                        <td>评价</td>
+                                        <td>评论时间</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,6 +111,27 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                <tr>
+                                    <td align="left">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" pid="${p.pid}" attitude="1">
+                                                <input type="radio">赞
+                                            </label>
+                                            <label class="btn btn-default" pid="${p.pid}" attitude="-1">
+                                                <input type="radio">踩
+                                            </label>
+                                            <label class="btn btn-default active " pid="${p.pid}" attitude="0">
+                                                <input type="radio">无可奉告
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <textarea pid="${p.pid}" rows="1" class="form-control"></textarea>
+                                    </td>
+                                    <td align="right">
+                                        <button class="btn commButton" pid="${p.pid}">提交评论</button>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                             </div>

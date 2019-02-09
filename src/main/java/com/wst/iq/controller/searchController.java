@@ -3,10 +3,7 @@ package com.wst.iq.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.wst.iq.pojo.PicNickname;
-import com.wst.iq.pojo.PicType;
-import com.wst.iq.pojo.Picture;
-import com.wst.iq.pojo.User;
+import com.wst.iq.pojo.*;
 import com.wst.iq.service.*;
 import com.wst.iq.util.ImageUtil;
 import com.wst.iq.util.Page;
@@ -17,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.imageio.ImageIO;
@@ -137,7 +135,7 @@ public class searchController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String register(User user, Model model){
+    public String register(User user, Model model, HttpSession session){
         String name = HtmlUtils.htmlEscape(user.getName());
         user.setName(name);
         if(userService.isExist(name)){
@@ -147,7 +145,9 @@ public class searchController {
             model.addAttribute("user",null);
             return "addUser";
         }
+        user.setNickname(name);
         userService.add(user);
+        session.setAttribute("user", user);
         return "redirect:search";
     }
 
@@ -170,9 +170,21 @@ public class searchController {
     }
 
     @RequestMapping("logout")
-    public String logout( HttpSession session) {
+    public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:search";
+    }
+
+    @RequestMapping("addComment")
+    @ResponseBody
+    public String addComment(PicComment picComment, HttpSession session){
+        if (session.getAttribute("user") != null) {
+            picComment.setUid(((User) session.getAttribute("user")).getUid());
+        }else {
+            picComment.setUid(0);
+        }
+        picCommentService.add(picComment);
+        return "success";
     }
 }
 
