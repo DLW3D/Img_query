@@ -41,7 +41,7 @@ public class searchController {
     @RequestMapping("search")
     public String search(String keyword, Model model, Page page){
 
-        PageHelper.offsetPage(0,20);
+        PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Picture> ps = pictureService.search(keyword);
 
         int total = (int) new PageInfo<Picture>(ps).getTotal();

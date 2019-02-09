@@ -79,7 +79,9 @@
                         <td><fmt:formatDate value="${p.date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>${p.used}</td>
                         <td>
-                            <button pid="${p.pid}" class="checkComment btn btn-primary btn-xs">查看评论</button>
+                            <a href="editPicture?pid=${p.pid}" class="btn btn-primary btn-xs">编辑</a>
+                            <a href="img/original/${p.pid}.jpg" class="btn btn-success">查看大图</a>
+                            <button pid="${p.pid}" class="checkComment btn btn-success">查看评论</button>
                         </td>
                     </tr>
                     <tr class="CommentTR" pid="${p.pid}" style="display: none;">
