@@ -2,9 +2,11 @@ package com.wst.iq.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.wst.iq.pojo.PicNickname;
 import com.wst.iq.pojo.PicType;
 import com.wst.iq.pojo.Picture;
+import com.wst.iq.pojo.User;
 import com.wst.iq.service.*;
 import com.wst.iq.util.ImageUtil;
 import com.wst.iq.util.Page;
@@ -13,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -125,4 +130,59 @@ public class searchController {
 
         return "redirect:editPicture?pid="+type.getPid();
     }
+
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String register(){
+        return "addUser";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public String register(User user, Model model){
+        String name = HtmlUtils.htmlEscape(user.getName());
+        user.setName(name);
+        if(userService.isExist(name)){
+            String m ="用户名已经被使用";
+            model.addAttribute("msg", m);
+            //服务端跳转到addUser.jsp的时候不带上参数user, 否则当注册失败的时候，会在原本是“请登录”的超链位置显示刚才注册的名称。
+            model.addAttribute("user",null);
+            return "addUser";
+        }
+        userService.add(user);
+        return "redirect:search";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String login(@RequestParam("name") String name, @RequestParam("password") String password, Model model, HttpSession session){
+        name = HtmlUtils.htmlEscape(name);
+        User user = userService.get(name,password);
+
+        if(null==user){
+            model.addAttribute("msg", "账号或密码错误");
+            return "login";
+        }
+        session.setAttribute("user", user);
+        return "redirect:search";
+    }
+
+    @RequestMapping("logout")
+    public String logout( HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:search";
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

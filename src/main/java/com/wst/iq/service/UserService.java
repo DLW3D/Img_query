@@ -12,4 +12,7 @@ public interface UserService {
     void fill(Picture picture);
     void fill(PicComment picComment);
     void fillThrow(List<Picture> pictures);
+    boolean isExist(String name);
+    void add(User user);
+    User get(String name, String password);
 }

@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" import="java.util.*"%>
-
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Title</title>
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
+         pageEncoding="UTF-8" isELIgnored="false"%>
+<%@include file="header.jsp"%>
+<title>搜索图片</title>
 <script>
     $(function(){
         $("button.checkComment").click(function(){
@@ -27,6 +16,19 @@
     <ol class="breadcrumb">
         <li><a href="/search">图片搜索</a></li>
         <li class="active">主页</li>
+        <span class="pull-right">
+            <c:if test="${!empty user}">
+                这是你的用户名:
+                <a href="login">${user.name}</a>
+                你不喜欢也没办法,反正不能改
+                <a href="logout">退出</a>
+            </c:if>
+            <c:if test="${empty user}">
+                你可以:
+                <a href="login">登录</a>
+                <a href="register">注册</a>
+            </c:if>
+        </span>
     </ol>
 
     <div class="container">
