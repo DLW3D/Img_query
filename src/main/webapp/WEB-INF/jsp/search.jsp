@@ -47,7 +47,7 @@
                            class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
                         <button class="btn btn-default btn-primary" type="submit">搜索</button>
-                        <a class="btn btn-default" href="addPicture">上传图片</a>
+                        <a class="btn btn-default" href="addPictureThird">上传图片</a>
                     </span>
                 </div>
             </form>

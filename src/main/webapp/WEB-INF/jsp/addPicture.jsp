@@ -12,13 +12,49 @@
         }
         return true;
     }
+    var nameCheck = false;
+    function checkName(callback){
+        $.post(
+            "isNameExist",
+            {"name":$("#name").val()},
+            function(result){
+                if("success"==result)
+                    result = true;
+                else
+                    result = false;
+                callback(result);
+            }
+        );
+    }
+
     $(function(){
         $("#addForm").submit(function(){
             if(!checkEmpty("name","图片名称"))
                 return false;
+            if(!nameCheck)
+                return false;
             if(!checkEmpty("image","上传图片"))
                 return false;
             return true;
+        });
+        //实时检测重名问题
+        $("#name").blur(function(){
+            var check = $("#check");
+            if ($(this).val() == "") {
+                check.text("")
+                return;
+            }
+            nameCheck = false;
+            check.text("检测中...");
+            checkName(function (result) {
+                if(result){
+                    nameCheck = true;
+                    check.html("<div style='color: green'>名称可用✔</div>");
+                }else {
+                    nameCheck = false;
+                    check.html("<div style='color: red'>重名✖</div>");
+                }
+            })
         });
     });
 </script>
@@ -39,7 +75,10 @@
                     <table class="table table-bordered">
                         <tr>
                             <td>图片名称</td>
-                            <td><input name="name" type="text" placeholder="不可修改" id="name" /></td>
+                            <td>
+                                <input name="name" type="text" placeholder="不可修改" id="name" />
+                                <div id="check" style="font-size: 12px"></div>
+                            </td>
                         </tr>
                         <tr>
                             <td>上传图片</td>
@@ -50,7 +89,7 @@
                         <tr class="submitTR">
                             <td colspan="2" align="center">
                                 <c:if test="${!empty user}">
-                                    <input type="hidden" name="uid" value="${user.uid}">
+                                    <input type="hidden" name="uid" value="${user.uid}" id="uid">
                                 </c:if>
                                 <button type="submit" class="btn btn-success">提 交</button>
                             </td>

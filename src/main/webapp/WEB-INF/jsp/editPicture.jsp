@@ -40,7 +40,14 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>图片</td>
-                        <td><img width="40px" src="img/small/${p.pid}.jpg"></td>
+                        <td><c:choose>
+                            <c:when test="${empty p.url or p.url==''}">
+                            <img width="40px" src="img/small/${p.pid}.jpg">
+                            </c:when>
+                            <c:otherwise>
+                            <img width="40px" src="${p.url}">
+                            </c:otherwise>
+                            </c:choose>
                     </tr>
                     <tr>
                         <td>图片名称</td>

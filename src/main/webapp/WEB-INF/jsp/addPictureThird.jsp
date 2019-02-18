@@ -12,11 +12,26 @@
         }
         return true;
     }
+    var nameCheck = false;
+    function checkName(callback){
+        $.post(
+            "isNameExist",
+            {"name":$("#name").val()},
+            function(result){
+                if("success"==result)
+                    result = true;
+                else
+                    result = false;
+                callback(result);
+            }
+        );
+    }
 
     $(function(){
-        var uploading = false;
         $("#addForm").submit(function(){
             if(!checkEmpty("name","图片名称"))
+                return false;
+            if(!nameCheck)
                 return false;
             if(!checkEmpty("image","上传图片"))
                 return false;
@@ -25,6 +40,7 @@
             var url;
             var formData = new FormData();
             formData.append("smfile",$("#image")[0].files[0]);
+            //交由第三方处理
             $.ajax({
                 url: "https://sm.ms/api/upload",
                 type: 'POST',
@@ -32,9 +48,12 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function(){
-                    uploading = true;
+                    var but = $("button.btn-success");
+                    but.attr("disabled",true);
+                    but[0].innerHTML = "上传中...";
                 },
                 success : function (result) {
+                    //将处理数据返回数据库
                     if (result.code == "success"){
                         url = result.data.url;
                         $.post(
@@ -45,11 +64,28 @@
                             }
                         );
                     }
-                    uploading = false;
                 }
             });
-
             return false;
+        });
+        //实时检测重名问题
+        $("#name").blur(function(){
+            var check = $("#check");
+            if ($(this).val() == "") {
+                check.text("")
+                return;
+            }
+            nameCheck = false;
+            check.text("检测中...");
+            checkName(function (result) {
+                if(result){
+                    nameCheck = true;
+                    check.html("<div style='color: green'>名称可用✔</div>");
+                }else {
+                    nameCheck = false;
+                    check.html("<div style='color: red'>重名✖</div>");
+                }
+            })
         });
     });
 </script>
@@ -70,7 +106,10 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>图片名称</td>
-                        <td><input name="name" type="text" placeholder="不可修改" id="name" /></td>
+                        <td>
+                            <input name="name" type="text" placeholder="不可修改" id="name" />
+                            <div id="check" style="font-size: 12px"></div>
+                        </td>
                     </tr>
                     <tr>
                         <td>上传图片</td>

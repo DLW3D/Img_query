@@ -66,7 +66,7 @@ public class searchController {
     @RequestMapping("addPic")
     public String addPic(Picture picture, HttpSession session, UploadedImageFile uploadedImageFile){
         pictureService.add(picture);
-        if (picture.getPid() == -1) return "search";//TODO:还未进行错误处理
+        if (picture.getPid() == -1) return "search";
         //构造地址
         String fileName = picture.getPid()+ ".jpg";
         String imageFolder= session.getServletContext().getRealPath("img/original");
@@ -99,6 +99,7 @@ public class searchController {
     @ResponseBody
     public String addPicThird(Picture picture){
         pictureService.add(picture);
+        if (picture.getPid() == -1) return "search";
         return picture.getPid() + "";
     }
 
@@ -207,6 +208,16 @@ public class searchController {
             return "success";
         }else {
             return "error";
+        }
+    }
+
+    @RequestMapping("isNameExist")
+    @ResponseBody
+    public String isNameExist(String name){
+        if (pictureService.isExist(name)){
+            return "error";
+        }else {
+            return "success";
         }
     }
 }
