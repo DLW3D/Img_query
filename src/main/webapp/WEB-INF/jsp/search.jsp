@@ -72,7 +72,14 @@
                     <tr>
                         <td>${p.pid}</td>
                         <td>
-                            <img width="40px" src="img/small/${p.pid}.jpg">
+                            <c:choose>
+                                <c:when test="${empty p.url or p.url==''}">
+                                    <img width="40px" src="img/small/${p.pid}.jpg">
+                                </c:when>
+                                <c:otherwise>
+                                    <img width="40px" src="${p.url}">
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>${p.name}</td>
                         <td>
@@ -85,7 +92,16 @@
                         <td>${p.used}</td>
                         <td>
                             <a href="editPicture?pid=${p.pid}" class="btn btn-primary btn-xs">编辑</a>
-                            <a href="img/original/${p.pid}.jpg" class="btn btn-success get-picture" pid="${p.pid}">查看大图</a>
+                            <a
+                            <c:choose>
+                                <c:when test="${empty p.url or p.url==''}">
+                                    href="img/original/${p.pid}.jpg"
+                                </c:when>
+                                <c:otherwise>
+                                    href="${p.url}"
+                                </c:otherwise>
+                            </c:choose>
+                                    class="btn btn-success get-picture" pid="${p.pid}">查看大图</a>
                             <button pid="${p.pid}" class="checkComment btn btn-success">查看评论</button>
                         </td>
                     </tr>
