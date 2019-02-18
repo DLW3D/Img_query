@@ -199,6 +199,16 @@ public class searchController {
         picCommentService.add(picComment);
         return "success";
     }
+
+    @RequestMapping("addUsed")
+    @ResponseBody
+    public String addUsed(Integer pid){
+        if (pictureService.addUsed(pid) == 1){
+            return "success";
+        }else {
+            return "error";
+        }
+    }
 }
 
 

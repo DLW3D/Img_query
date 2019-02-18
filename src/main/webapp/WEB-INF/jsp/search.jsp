@@ -22,6 +22,11 @@
                 }
             );
         });
+        $("a.get-picture").click(function () {
+            $.post(
+                "addUsed",{"pid":$(this).attr("pid")}
+            )
+        })
     });
 
 </script>
@@ -80,7 +85,7 @@
                         <td>${p.used}</td>
                         <td>
                             <a href="editPicture?pid=${p.pid}" class="btn btn-primary btn-xs">编辑</a>
-                            <a href="img/original/${p.pid}.jpg" class="btn btn-success">查看大图</a>
+                            <a href="img/original/${p.pid}.jpg" class="btn btn-success get-picture" pid="${p.pid}">查看大图</a>
                             <button pid="${p.pid}" class="checkComment btn btn-success">查看评论</button>
                         </td>
                     </tr>

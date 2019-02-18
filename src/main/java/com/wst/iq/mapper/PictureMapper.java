@@ -23,4 +23,7 @@ public interface PictureMapper {
 
     // 非自动生成字段
     List<Picture> selectByKeyword(@Param("keyword")String keyword);
+
+    // 非自动生成字段
+    int updateUsed(Integer pid);
 }

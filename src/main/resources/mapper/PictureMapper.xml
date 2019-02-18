@@ -156,4 +156,10 @@
     pic_nickname.nickname LIKE '%${keyword}%' OR picture.name LIKE '%${keyword}%'
     ORDER BY used
   </select>
+  <!--自定义SQL-->
+  <update id="updateUsed" parameterType="java.lang.Integer">
+    UPDATE picture
+    SET used = used + 1
+    WHERE pid = #{pid,jdbcType=INTEGER}
+  </update>
 </mapper>

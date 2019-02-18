@@ -40,4 +40,9 @@ public class PictureServiceImpl implements PictureService {
         List result = pictureMapper.selectByExample(pictureExample);
         return !result.isEmpty();
     }
+
+    @Override
+    public int addUsed(Integer pid) {
+        return pictureMapper.updateUsed(pid);
+    }
 }
