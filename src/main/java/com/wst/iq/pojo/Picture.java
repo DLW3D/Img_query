@@ -8,7 +8,7 @@ public class Picture {
 
     private String name;
 
-    private String type;
+    private String url;
 
     private Integer uid;
 
@@ -38,12 +38,12 @@ public class Picture {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getType() {
-        return type;
+    public String getUrl() {
+        return url;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 
     public Integer getUid() {
@@ -107,7 +107,7 @@ public class Picture {
         return "Picture{" +
                 "pid=" + pid +
                 ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                ", url='" + url + '\'' +
                 ", uid=" + uid +
                 ", date=" + date +
                 ", used=" + used +

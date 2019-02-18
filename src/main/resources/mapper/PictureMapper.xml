@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.wst.iq.pojo.Picture">
     <id column="pid" jdbcType="INTEGER" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="used" jdbcType="INTEGER" property="used" />
@@ -39,7 +39,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    pid, name, type, uid, date, used
+    pid, name, url, uid, date, used
   </sql>
   <select id="selectByExample" parameterType="com.wst.iq.pojo.PictureExample" resultMap="BaseResultMap">
     select
@@ -68,9 +68,9 @@
   </delete>
   <!--增加了返回自增主键-->
   <insert id="insert" parameterType="com.wst.iq.pojo.Picture" useGeneratedKeys="true" keyProperty="pid">
-    insert into picture (pid, name, type, 
+    insert into picture (pid, name, url, 
       uid, date, used)
-    values (#{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    values (#{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{uid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{used,jdbcType=INTEGER})
   </insert>
   <!--增加了返回自增主键-->
@@ -83,8 +83,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="type != null">
-        type,
+      <if test="url != null">
+        url,
       </if>
       <if test="uid != null">
         uid,
@@ -103,8 +103,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
@@ -123,8 +123,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         uid = #{uid,jdbcType=INTEGER},
@@ -141,7 +141,7 @@
   <update id="updateByPrimaryKey" parameterType="com.wst.iq.pojo.Picture">
     update picture
     set name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP},
       used = #{used,jdbcType=INTEGER}
