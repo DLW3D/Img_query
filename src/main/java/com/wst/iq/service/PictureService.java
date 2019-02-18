@@ -11,4 +11,6 @@ public interface PictureService {
     Picture get(int pid);
 
     void add(Picture picture);
+
+    boolean isExist(String name);
 }
